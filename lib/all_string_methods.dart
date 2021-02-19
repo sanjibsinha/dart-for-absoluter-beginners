@@ -2,6 +2,7 @@ String getVariousSymbols() {
   var miscSymbols = 'Various symbols: '
       '\u{266A}, \u{266B}, \u{266C}, \u{266D}';
   return miscSymbols;
+  // Various symbols: ♪, ♫, ♬, ♭
 }
 
 String thinkStringAsAList() {
