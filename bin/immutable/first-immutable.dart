@@ -69,14 +69,14 @@ void main(List<String> args) {
       ? print('true')
       : print('false');
 
-  /// prints false; that means object state has been changed
+  /// prints true; that means object state has not been changed
 
   secondAccountholder.account.id.hashCode ==
           firstCopyOfSecondAccountholder.account.id.hashCode
       ? print('true')
       : print('false');
 
-  /// prints false; that means object state has been changed
+  /// prints false; that means account id object state has been changed
 }
 
 /**

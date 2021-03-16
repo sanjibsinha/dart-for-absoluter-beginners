@@ -33,7 +33,11 @@ void main(List<String> args) {
   print(firstAccountholder.hashCode);
 
   final updateFirstAccountHolder = firstAccountholder.copyWith(
-      'John', Account(1, 'B. Garden'), '123 MNC Rd', 4561);
+    firstAccountholder.name,
+    Account(firstAccountholder.account.id, 'B. Garden'),
+    '123 MNC Rd',
+    4561,
+  );
   print(updateFirstAccountHolder.name);
   print(updateFirstAccountHolder.account.id);
   print(updateFirstAccountHolder.account.nameOfBranch);
