@@ -1,7 +1,7 @@
 class Account {
   final int id;
   final String nameOfBranch;
-  const Account(this.id, this.nameOfBranch);
+  const Account({this.id, this.nameOfBranch});
 }
 
 class AccountHolder {
@@ -9,36 +9,70 @@ class AccountHolder {
   final String address;
   final int amount;
   final Account account;
-  const AccountHolder(this.name, this.account, this.address, this.amount);
+  const AccountHolder({this.name, this.account, this.address, this.amount});
 }
 
 void main(List<String> args) {
-  final firstAccountholder =
-      const AccountHolder('John', Account(1, 'B. Garden'), '12, ABC Rd.', 1256);
-  print(firstAccountholder.name.hashCode);
+  final firstAccountholder = const AccountHolder(
+    name: 'John',
+    account: Account(id: 1, nameOfBranch: 'B. Garden'),
+    address: '12, ABC Rd.',
+    amount: 1256,
+  );
+  print('Name of first account holder: ${firstAccountholder.name}');
+  print('Account ID of first account holder: ${firstAccountholder.account.id}');
+  print('Amount of first account holder: ${firstAccountholder.amount}');
+
   final secondAccountholder = const AccountHolder(
-      'Json', Account(2, 'B. Garden'), '123, XYZ Rd.', 2563);
-  print(secondAccountholder.name.hashCode);
+    name: 'John',
+    account: Account(id: 2, nameOfBranch: 'B. Garden'),
+    address: '712, XYZ Rd.',
+    amount: 5236,
+  );
+  print('Name of second account holder: ${secondAccountholder.name}');
+  print(
+      'Account ID of second account holder: ${secondAccountholder.account.id}');
+  print('Amount of second account holder: ${secondAccountholder.amount}');
 
   /// we want to modify the first account holder's address and amount
   ///
   final firstCopyOfFirstAccountholder = const AccountHolder(
-      'John', Account(1, 'B. Garden'), '1234, MNC Rd.', 5613);
-  print(firstCopyOfFirstAccountholder.name.hashCode);
+    name: 'John',
+    account: Account(id: 1, nameOfBranch: 'B. Garden'),
+    address: '45, MNC Rd.',
+    amount: 2256,
+  );
+  firstAccountholder.name == firstCopyOfFirstAccountholder.name
+      ? print('First account holder\'s name unchanged.')
+      : print('Error in first account holder\'s name.');
+  firstAccountholder.account.id == firstCopyOfFirstAccountholder.account.id
+      ? print('First account holder\'s id unchanged.')
+      : print('Error in first account holder\'s id.');
 
   /// we want to modify the second account holder's amount
-  ///
+  /// while doing so inadvertently account id has been changed
   final firstCopyOfSecondAccountholder = const AccountHolder(
-      'Json', Account(2, 'B. Garden'), '123, XYZ Rd.', 4562);
-  print(firstCopyOfSecondAccountholder.name.hashCode);
+    name: 'John',
+    account: Account(id: 1, nameOfBranch: 'B. Garden'),
+    address: '712, XYZ Rd.',
+    amount: 10236,
+  );
+  secondAccountholder.name == firstCopyOfSecondAccountholder.name
+      ? print('Second account holder\'s name unchanged.')
+      : print('Error in second account holder\'s name.');
+  secondAccountholder.account.id == firstCopyOfSecondAccountholder.account.id
+      ? print('Second account holder\'s id unchanged.')
+      : print('Error in second account holder\'s id.');
 
-  firstAccountholder == firstCopyOfFirstAccountholder
+  firstAccountholder.name.hashCode ==
+          firstCopyOfFirstAccountholder.name.hashCode
       ? print('true')
       : print('false');
 
   /// prints false; that means object state has been changed
 
-  secondAccountholder == firstCopyOfSecondAccountholder
+  secondAccountholder.account.id.hashCode ==
+          firstCopyOfSecondAccountholder.account.id.hashCode
       ? print('true')
       : print('false');
 
@@ -46,11 +80,17 @@ void main(List<String> args) {
 }
 
 /**
- * 48244218
-71921806
-48244218
-71921806
-false
+ * Name of first account holder: John
+Account ID of first account holder: 1
+Amount of first account holder: 1256
+Name of second account holder: John
+Account ID of second account holder: 2
+Amount of second account holder: 5236
+First account holder's name unchanged.
+First account holder's id unchanged.
+Second account holder's name unchanged.
+Error in second account holder's id.
+true
 false
 *
  */
